@@ -8,6 +8,7 @@ import {
 
 const DEFAULT_STATE = {
   userList: [],
+  searchedList: null,
   selectedUser: null,
   isUpdating: false,
 };
