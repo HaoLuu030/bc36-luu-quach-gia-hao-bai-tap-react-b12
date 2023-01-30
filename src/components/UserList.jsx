@@ -8,6 +8,7 @@ export default function UserList() {
   const [keyword, setKeyword] = useState("");
   const [type, setType] = useState("All");
   const renderUsers = () => {
+    // a series of search function stringed together, no matters which one comes first
     const searchedData = userState.userList
       .filter((element) => {
         return (
@@ -15,10 +16,16 @@ export default function UserList() {
         );
       })
       .filter((element) => {
-        if (type === "All") {
-          return element;
+        switch (type) {
+          case "1": {
+            return element.type === "Client";
+          }
+          case "2": {
+            return element.type === "Admin";
+          }
+          default:
+            return element;
         }
-        return element.type === type;
       });
     return searchedData.map((element) => {
       return <UserItem key={element.id} user={element} />;
@@ -47,9 +54,9 @@ export default function UserList() {
         <div className="col-3 ml-auto">
           <div className="form-group mb-0">
             <select onChange={handleFilter} className="form-control">
-              <option value="All">All</option>
-              <option value="Client">Client</option>
-              <option value="Admin">Admin</option>
+              <option value="0">All</option>
+              <option value="1">Client</option>
+              <option value="2">Admin</option>
             </select>
           </div>
         </div>
